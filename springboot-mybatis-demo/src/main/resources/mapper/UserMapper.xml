@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhang.springbootmybatisdemo.dao.UserDao">
+    <sql id="BASE_TABLE">
+        tb_user
+    </sql>
+
+    <sql id="BASE_COLUMN">
+        user_id,username,password
+    </sql>
+
+    <!--因为mysql的表字段和User对象的字段不一致，所以需要转换匹配-->
+    <resultMap id="BaseResultMap" type="com.zhang.springbootmybatisdemo.domain.User">
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="add" parameterType="com.zhang.springbootmybatisdemo.domain.User">
+      insert into
+      tb_user(user_id,username,password)
+      values(#{userId,jdbcType=VARCHAR},#{username,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR})
+    </insert>
+
+    <!--resultMap 是将返回的结果进行mapping匹配，如果mysql和User的字段一致，那么可以直接使用 resultType="User" 直接返回-->
+    <select id="searchById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/>
+        WHERE user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="searchAll" resultMap="BaseResultMap">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        FROM
+        <include refid="BASE_TABLE"/>
+    </select>
+</mapper>

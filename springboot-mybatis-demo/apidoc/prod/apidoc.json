@@ -1,0 +1,21 @@
+{
+  "name": "Spring Boot Demo Api",
+  "version": "1.0.0",
+  "title": "BIGDATA-API",
+  "url": "http://localhost:8080",
+  "sampleUrl": "http://localhost:8080",
+  "template": {
+    "forceLanguage": "zh-cn"
+  },
+  "template": {
+    "withCompare": true,
+    "withGenerator": true
+  },
+  "template": {
+    "jQueryAjaxSetup": {
+      "contentType": "application/json"
+    }
+  }
+}
+
+
